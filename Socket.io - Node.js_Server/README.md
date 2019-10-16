@@ -1,20 +1,20 @@
-# NodeJSChatServer
-#### Socket io chat server made with node js 
+## NodeJS Chat Server
+#### Socket.io chat server made with NodeJS 
 
-## Installation
+##### Installation
 
-* clone the projet from the git repository 
-* under your project directory execute this command 
+* Clone the projet from the git repository 
+* Under your project directory execute this command 
 
 ```
 $ npm install 
 ```
-*this will install all the required dependencies 
+*This will install all the required dependencies 
 
-* run your project using the following command 
+* Run your project using the following command 
 
 ```
-$ node server.js
+$ nodemon server.js
 ```
  
- * your project will run on htttp://localhost:3000/
+ * Your project will run on htttp://localhost:3000/

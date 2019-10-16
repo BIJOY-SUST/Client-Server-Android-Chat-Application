@@ -24,9 +24,9 @@
   - Then load the Server folder into VSCode.
   - Install all the dependencies from here.
   - Run - Nodemon server.js in the terminal.
-  - Then load the Android app in the Android Studio. Run the project in the virtual devices.
+  - Then load the Android app in your Android Studio. Run the project in the virtual devices.
   - Or, Download the apk file which I provide in this link and install it into your Android device.
-  - When the app starts a splash screen loaded.
+  - When the app starts, a splash screen loaded.
   - After, the user can log in here. 
   - Now User Wants to login.
   - Multiple users can exchange messages between them.

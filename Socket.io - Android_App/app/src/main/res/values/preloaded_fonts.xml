@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/test</item>
+        <item>@font/alex_brush</item>
+        <item>@font/alike_angular</item>
+        <item>@font/almendra_display</item>
+    </array>
+</resources>

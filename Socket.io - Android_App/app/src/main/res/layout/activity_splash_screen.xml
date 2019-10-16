@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradientsplashbackground">
+    <!--    tools:context=".SplashScreen"-->
+
+
+    <ImageView
+        android:id="@+id/logosust"
+        android:layout_width="193dp"
+        android:layout_height="156dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        app:srcCompat="@drawable/logo" />
+
+    <ImageView
+        android:id="@+id/logoblockchain"
+        android:layout_width="match_parent"
+        android:layout_height="337dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="217dp"
+        app:srcCompat="@drawable/design" />
+
+    <TextView
+        android:id="@+id/chat1"
+        android:layout_width="match_parent"
+        android:layout_height="257dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="570dp"
+        android:fontFamily="@font/alex_brush"
+        android:text="Chat Application"
+        android:textColor="#070605"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+</RelativeLayout>

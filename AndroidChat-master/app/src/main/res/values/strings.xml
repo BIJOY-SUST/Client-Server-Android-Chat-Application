@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BROS</string>
+    // New file
+    //lines to be added are below
+    //lines to be added are below
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Server IPv4 Address</string>
+    <string name="welcome_user">Welcome User</string>
+
+
+</resources>

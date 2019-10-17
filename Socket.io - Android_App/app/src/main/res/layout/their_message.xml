@@ -12,8 +12,8 @@
         android:layout_alignParentLeft="true"
         android:scaleType="centerInside"
         android:background="@drawable/circle"
-        android:layout_width="34dp"
-        android:layout_height="34dp" />
+        android:layout_width="32dp"
+        android:layout_height="32dp" />
 
     <TextView
         android:id="@+id/name"

@@ -168,8 +168,9 @@ console.log('user connected')
         io.emit('message', message );
     
     });
-      
-  
+
+
+    
 
     socket.on('disconnect', function () {
 
@@ -212,6 +213,6 @@ console.log('user connected')
 
 server.listen(3000,()=>{
 
-    console.log('Node app is running on port 3000');
+    console.log('Message: Node app is running on port 3000');
 
 });

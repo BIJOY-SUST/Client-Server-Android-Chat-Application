@@ -6,6 +6,6 @@
     <color name="colorPrimary">#FF36C44B</color>
     <color name="colorPrimaryDark">#FF36C44B</color>
     <color name="colorAccent">#20AA34</color>
-    <color name="typing">#ba160c</color>
+    <color name="typing">#FF36C44B</color>
 
 </resources>

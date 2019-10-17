@@ -11,7 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="76dp"
+        android:layout_height="57dp"
         android:background="#0A770F">
 
         <Button

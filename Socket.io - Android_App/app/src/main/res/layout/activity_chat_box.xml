@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="76dp"
+        android:layout_height="57dp"
         android:background="#0A770F">
 
         <Button
@@ -49,6 +49,7 @@
     <ListView
         android:layout_width="match_parent"
         android:id="@+id/messageListView"
+        android:background="#fff"
         android:layout_weight="2"
         android:divider="#fff"
         android:transcriptMode="normal"
@@ -65,15 +66,21 @@
         android:orientation="horizontal">
 
 
-        <ImageButton
-            android:id="@+id/sendFile"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_attach_file_black_24dp"
-            android:visibility="invisible"
-            android:paddingRight="5dp" />
-
+<!--        <ImageButton-->
+<!--            android:id="@+id/sendFile"-->
+<!--            android:layout_width="35dp"-->
+<!--            android:layout_height="35dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@drawable/ic_attach_file_black_24dp"-->
+<!--            android:paddingRight="5dp" />-->
+        <ImageView
+            android:id="@+id/btnSpeak"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:onClick="getSpeechInput"
+            android:paddingRight="5dp"
+            android:src="@drawable/ic_mic"/>
         <EditText
             android:id="@+id/textField"
             android:layout_width="match_parent"

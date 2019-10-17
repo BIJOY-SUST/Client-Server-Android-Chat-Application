@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -35,12 +36,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,14 +83,6 @@ public class ChatBoxActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
 
-    // rest api
-    private static final int FILE_SELECT_CODE = 0;
-
-    private static final String URL = "https://192.168.43.246:3000/messageUser";
-
-//    private static final String URL = "https://bijoy-weather-application.herokuapp.com/weather?address=boston";
-
-
 
     public static String Nickname ;
     @Override
@@ -96,11 +97,6 @@ public class ChatBoxActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_chat_box);
-
-
-
-
-
 
 
         messagetxt = (EditText) findViewById(R.id.message) ;
@@ -123,12 +119,6 @@ public class ChatBoxActivity extends AppCompatActivity {
             e.printStackTrace();
 
         }
-       //setting up recyler
-//        MessageList = new ArrayList<>();
-//        myRecylerView = (RecyclerView) findViewById(R.id.messagelist);
-//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        myRecylerView.setLayoutManager(mLayoutManager);
-//        myRecylerView.setItemAnimator(new DefaultItemAnimator());
 
 
         // friend list
@@ -154,7 +144,6 @@ public class ChatBoxActivity extends AppCompatActivity {
 
 
 
-        sendFile = findViewById(R.id.sendFile);
 
         textField = findViewById(R.id.textField);
         sendButton = findViewById(R.id.sendButton);
@@ -165,97 +154,6 @@ public class ChatBoxActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(this, R.layout.item_message, messageFormatList);
         messageListView.setAdapter(messageAdapter);
 
-//        send file with boss
-
-        sendFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
-                startActivityForResult(Intent.createChooser(intent, "Select file"), 1);
-//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//                intent.setType("*/*");
-//                intent.addCategory(Intent.CATEGORY_OPENABLE);
-//
-//                try {
-//                    startActivityForResult(
-//                            Intent.createChooser(intent, "Select a File to Upload"),
-//                            FILE_SELECT_CODE);
-//                } catch (android.content.ActivityNotFoundException ex) {
-//                    // Potentially direct the user to the Market with a Dialog
-//                    Toast.makeText(ChatBoxActivity.this, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
-//                }
-            }
-        });
-
-        // send file with boss
-
-
-
-        //rest api
-        if(flag){
-
-
-            //Creating a retrofit object
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Api.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
-                    .build();
-
-            //creating the api interface
-            Api api = retrofit.create(Api.class);
-
-            //now making the call object
-            //Here we are using the api method that we created inside the api interface
-            Call<List<MessageNet>> call = api.getHeroes();
-
-            //then finallly we are making the call using enqueue()
-            //it takes callback interface as an argument
-            //and callback is having two methods onRespnose() and onFailure
-            //if the request is successfull we will get the correct response and onResponse will be executed
-            //if there is some error we will get inside the onFailure() method
-            call.enqueue(new Callback<List<MessageNet>>() {
-
-
-                @Override
-                public void onResponse(Call<List<MessageNet>> call, retrofit2.Response<List<MessageNet>> response) {
-                    List<MessageNet> heroList = response.body();
-                    System.out.println("print hoitese kina");
-                    for(MessageNet h:heroList){
-                        Log.d("Username : ",h.getUserName());
-                        String name = h.getUserName();
-                        System.out.println(name);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<MessageNet>> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
-/*            StringRequest request = new StringRequest(URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Log.d("CODE",response);
-                    System.out.println("Hello World");
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
-
-            RequestQueue queue = Volley.newRequestQueue(this);
-            queue.add(request);*/
-
-            flag = false;
-        }
-
-
 
         // message send action
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -263,16 +161,17 @@ public class ChatBoxActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //retrieve the nickname and the message content and fire the event messagedetection
 
-                messageamr = textField.getText().toString();
-                messageamr.trim();
-                Log.d(TAG, "onClick: "+ messageamr.length()+ " "+messageamr);
+                messageamr = textField.getText().toString().trim();
+                String newMessage= messageamr.trim();
+
+                Log.d(TAG, "onClick: "+ newMessage.length()+ " "+newMessage);
                 Boolean containsSpace = true;
                 int i=0;
-                int length = messageamr.length();
+                int length = newMessage.length();
                 Log.d(TAG, "onClick: value of i: "+i+"value of length: "+length);
                 while (containsSpace && i<length){
                     Log.d(TAG, "onClick: Entered in While Loop");
-                    if(messageamr.charAt(i)!=' ')
+                    if(newMessage.charAt(i)!=' ')
                         containsSpace= false;
                     i++;
                 }
@@ -280,8 +179,14 @@ public class ChatBoxActivity extends AppCompatActivity {
                 if(!containsSpace)
                 {
                     Log.d(TAG, "onClick: Entered Here");
-                    socket.emit("messagedetection",Nickname,textField.getText().toString());
+                    socket.emit("messagedetection",Nickname,newMessage);
                     textField.setText(" ");
+                }
+                else{
+//                    textField.setError( "This value should not be null!" );
+                    Toast toast = Toast.makeText(getApplicationContext(), "This value should not be null!", Toast.LENGTH_SHORT);
+                    toast.show();
+
                 }
             }
         });
@@ -395,77 +300,48 @@ public class ChatBoxActivity extends AppCompatActivity {
                 });
             }
         });
+
     }
 
-    // boss
+
+    public void getSpeechInput(View view) {
+
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, 10);
+        } else {
+            Toast.makeText(this, "Your Device Don't Support Speech Input", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String path;
-        System.out.println("Dhukse activity te");
-        if (requestCode == 1) {
-            try {
-                Uri txtUri = data.getData();
-                path = txtUri.getPath();
-                System.out.println("file er path ta pathaitese");
-//                System.out.println(path);
-                Log.d(TAG, "onActivityResult: " + path);
-                String[] arrOfStr = path.split(":");
-                if (arrOfStr.length > 1) {
-                    Log.d(TAG, "onActivityResult: Textual " + path);
-                    new fileTransfer(arrOfStr[1]).execute();
-                } else {
-                    Log.d(TAG, "onActivityResult: Image " + path);
-                    new fileTransfer(arrOfStr[0]).execute();
+
+        switch (requestCode) {
+            case 10:
+                if (resultCode == RESULT_OK && data != null) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String ans = result.get(0);
+                    if(ans.length()>0)
+                    {
+                        Log.d(TAG, "onClick: Entered Here");
+                        socket.emit("messagedetection",Nickname,ans);
+                        textField.setText(" ");
+                    }
+                    else{
+//                    textField.setError( "This value should not be null!" );
+                        Toast toast = Toast.makeText(getApplicationContext(), "This value should not be null!", Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    }
                 }
-            } catch (NullPointerException e) {
-                Log.d(TAG, "onActivityResult: No File Selected");
-            }
+                break;
         }
-
-
     }
-
-
-    class fileTransfer extends AsyncTask<Void, Integer, String> {
-        String path;
-
-        fileTransfer(String path) {
-            this.path = path;
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            String filenameX = "";
-            try {
-                if (path.charAt(0) != '/') {
-                    path = "/storage/emulated/0/" + path;
-                }
-                File file = new File(path);
-                if (path.isEmpty()) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Path is empty", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-
-                FileInputStream fileInputStream = new FileInputStream(file);
-
-                long fileSize = file.length();
-                byte[] byteArray = new byte[(int) fileSize];
-                filenameX = file.getName();
-
-                Log.d(TAG, "doInBackground: " + filenameX);
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return filenameX;
-        }
-
-
-    }
-
-    // boss
 
     @Override
     protected void onDestroy() {
@@ -474,5 +350,5 @@ public class ChatBoxActivity extends AppCompatActivity {
 //        socket.emit("disconnectCheck", Nickname);
 
         socket.disconnect();
-  }
+    }
 }

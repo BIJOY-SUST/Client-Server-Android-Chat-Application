@@ -10,7 +10,7 @@
   - When the client system is loaded, an option to provide the IP address/port number  the chat server cause my server is public, this is by default under the code, and the name of joining user.
   - A proper GUI with a read-only text box to show the exchanged messages, a text entry field to write a new message and a Send button.
   - Each time Send is pressed with a new message in a client system, all of the users connected to the server will immediately see the new message.
-  - A list in the GUI to show the joined user(s) with the server.An option, shown as a menu item, to save the exchanged messages.
+  - A list in the GUI to show the joined user(s) with the server.
   - All the messages automatically save on the server.
   
 #### Extra Features:

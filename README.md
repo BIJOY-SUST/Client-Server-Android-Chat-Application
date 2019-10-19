@@ -32,6 +32,8 @@
   - Multiple users can exchange messages between them.
   - Users can view active users.
   
-![Screenshot from 2019-10-16 20-53-33](https://user-images.githubusercontent.com/41442625/66931372-cfc31380-f057-11e9-9f06-6309e20dced3.png)
+![Screenshot from 2019-10-19 18-45-57](https://user-images.githubusercontent.com/41442625/67145268-e6f54180-f2a1-11e9-8b61-80e494eb1dc3.png)
+![Screenshot from 2019-10-19 18-58-54](https://user-images.githubusercontent.com/41442625/67145328-93372800-f2a2-11e9-84ee-c2c7e5d93c29.png)
+
 
 

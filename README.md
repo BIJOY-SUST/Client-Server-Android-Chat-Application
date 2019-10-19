@@ -1,4 +1,5 @@
 # Socket.IO---Chat-Application
+
 ### A Chat Server System using Socket Programming
 
 
@@ -15,7 +16,8 @@
   
 #### Extra Features:
   - Users can register here. (Processing)
-  - Multiple users can exchange files between them. (Processing)
+  - This app can notify you which user was  connected or disconnected in the past.
+  - Convert Speech to Text.
   - When the app is started, a splash screen loaded.
 
 #### Procedures:

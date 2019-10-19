@@ -33,7 +33,4 @@
   - Users can view active users.
   
 ![Screenshot from 2019-10-19 18-45-57](https://user-images.githubusercontent.com/41442625/67145268-e6f54180-f2a1-11e9-8b61-80e494eb1dc3.png)
-![Screenshot from 2019-10-19 18-58-54](https://user-images.githubusercontent.com/41442625/67145328-93372800-f2a2-11e9-84ee-c2c7e5d93c29.png)
-
-
-
+![Screenshot from 2019-10-19 19-03-42](https://user-images.githubusercontent.com/41442625/67145415-4142d200-f2a3-11e9-8e5d-1c98c0db46ca.png)

@@ -1,6 +1,7 @@
 # Socket.IO---Chat-Application
 ### A Chat Server System using Socket Programming
 
+
 #### Introduction:
   - This android app is a real-time chat application based on a chat server system using socket programming. Here allow multiple users to join the chat server simultaneously using a client system and chat with the devices.
   

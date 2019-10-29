@@ -135,7 +135,7 @@ public class FriendActivity extends AppCompatActivity {
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FriendActivity.this, MainActivity.class);
+                Intent intent = new Intent(FriendActivity.this, FriendActivity.class);
                 startActivity(intent);
                 finish();
             }

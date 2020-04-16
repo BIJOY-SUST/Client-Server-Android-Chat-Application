@@ -1,4 +1,4 @@
-# Socket.IO---Chat-Application
+# Socket.IO---Chat Application
 
 ### A Chat Server System using Socket Programming
 

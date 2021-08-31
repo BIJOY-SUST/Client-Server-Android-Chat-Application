@@ -7,5 +7,5 @@ This is the code of our project for the course  ***CSE 362: Computer Networking 
 
 This android app is a real-time chat application based on a chat server system usign socket programming. Here, multiple user can join the chat server simultaneously using client system and chating with others.
 
-Descriptions of the project is in [*description.md*](https://github.com/BIJOY-SUST/Client-Server-Android-Chat-Application/blob/master/description.pdf)
+Descriptions and Instruction of the project is in [*description.md*](https://github.com/BIJOY-SUST/Client-Server-Android-Chat-Application/blob/master/description.pdf)
 
